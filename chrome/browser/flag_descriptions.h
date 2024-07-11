@@ -782,6 +782,12 @@ extern const char kEnableSearchEngineChoiceDescription[];
 extern const char kEnableSuspiciousSiteDetectionRTLookupsName[];
 extern const char kEnableSuspiciousSiteDetectionRTLookupsDescription[];
 
+extern const char kEnableExternalDisplayHdr10Name[];
+extern const char kEnableExternalDisplayHdr10Description[];
+
+extern const char kDoubleTapToZoomInTabletModeName[];
+extern const char kDoubleTapToZoomInTabletModeDescription[];
+
 extern const char kEnableFencedFramesName[];
 extern const char kEnableFencedFramesDescription[];
 

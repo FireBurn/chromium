@@ -148,7 +148,6 @@ DrmDisplay::DrmDisplay(const scoped_refptr<DrmDevice>& drm,
 
   SkColorSpacePrimaries output_primaries =
       display_snapshot.color_info().edid_primaries;
-#if BUILDFLAG(IS_CHROMEOS_ASH)
   is_hdr_capable_ =
       is_hdr_capable_ &&
       base::FeatureList::IsEnabled(display::features::kUseHDRTransferFunction);
@@ -164,7 +163,6 @@ DrmDisplay::DrmDisplay(const scoped_refptr<DrmDevice>& drm,
     SetColorspaceProperty(gfx::ColorSpace::CreateSRGB());
     ClearHdrOutputMetadata();
   }
-#endif
   drm_->plane_manager()->SetOutputColorSpace(crtc_, output_primaries);
 }
 

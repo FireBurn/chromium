@@ -4276,6 +4276,14 @@ const FeatureEntry kFeatureEntries[] = {
     {"top-chrome-touch-ui", flag_descriptions::kTopChromeTouchUiName,
      flag_descriptions::kTopChromeTouchUiDescription, kOsDesktop,
      MULTI_VALUE_TYPE(kTopChromeTouchUiChoices)},
+    {"use-hdr-transfer-function",
+     flag_descriptions::kUseHDRTransferFunctionName,
+     flag_descriptions::kUseHDRTransferFunctionDescription, kOsAll,
+     FEATURE_VALUE_TYPE(display::features::kUseHDRTransferFunction)},
+    {"enable-external-display-hdr10",
+     flag_descriptions::kEnableExternalDisplayHdr10Name,
+     flag_descriptions::kEnableExternalDisplayHdr10Description, kOsAll,
+     FEATURE_VALUE_TYPE(display::features::kEnableExternalDisplayHDR10Mode)},
 #if BUILDFLAG(ENABLE_WEBUI_TAB_STRIP)
     {flag_descriptions::kWebUITabStripFlagId,
      flag_descriptions::kWebUITabStripName,
@@ -4356,14 +4364,6 @@ const FeatureEntry kFeatureEntries[] = {
     // TODO(crbug.com/40652358): Remove this flag and provision when HDR is
     // fully
     //  supported on ChromeOS.
-    {"use-hdr-transfer-function",
-     flag_descriptions::kUseHDRTransferFunctionName,
-     flag_descriptions::kUseHDRTransferFunctionDescription, kOsCrOS,
-     FEATURE_VALUE_TYPE(display::features::kUseHDRTransferFunction)},
-    {"enable-external-display-hdr10",
-     flag_descriptions::kEnableExternalDisplayHdr10Name,
-     flag_descriptions::kEnableExternalDisplayHdr10Description, kOsCrOS,
-     FEATURE_VALUE_TYPE(display::features::kEnableExternalDisplayHDR10Mode)},
     {"adaptive-charging", flag_descriptions::kAdaptiveChargingName,
      flag_descriptions::kAdaptiveChargingDescription, kOsCrOS,
      FEATURE_VALUE_TYPE(ash::features::kAdaptiveCharging)},

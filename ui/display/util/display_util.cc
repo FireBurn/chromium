@@ -16,10 +16,7 @@
 #include "ui/display/types/display_snapshot.h"
 #include "ui/display/util/edid_parser.h"
 #include "ui/gfx/icc_profile.h"
-
-#if BUILDFLAG(IS_CHROMEOS_ASH)
 #include "ui/display/display_features.h"
-#endif
 
 namespace display {
 
@@ -167,7 +164,6 @@ gfx::ColorSpace GetColorSpaceFromEdid(const display::EdidParser& edid_parser) {
     if (base::Contains(edid_parser.supported_color_transfer_ids(),
                        gfx::ColorSpace::TransferID::PQ)) {
       transfer_id = gfx::ColorSpace::TransferID::PQ;
-#if BUILDFLAG(IS_CHROMEOS_ASH)
       if (base::FeatureList::IsEnabled(
               display::features::kEnableExternalDisplayHDR10Mode) &&
           edid_parser.is_external_display() &&
@@ -177,7 +173,6 @@ gfx::ColorSpace GetColorSpaceFromEdid(const display::EdidParser& edid_parser) {
                                             gfx::ColorSpace::MatrixID::RGB))) {
         return gfx::ColorSpace::CreateHDR10();
       }
-#endif
     } else if (base::Contains(edid_parser.supported_color_transfer_ids(),
                               gfx::ColorSpace::TransferID::HLG)) {
       transfer_id = gfx::ColorSpace::TransferID::HLG;
@@ -283,7 +278,6 @@ bool HasForceDisplayColorProfile() {
       /*switches::kForceDisplayColorProfile=*/"force-color-profile");
 }
 
-#if BUILDFLAG(IS_CHROMEOS)
 // Constructs the raster DisplayColorSpaces out of |snapshot_color_space|,
 // including the HDR ones if present and |allow_high_bit_depth| is set.
 gfx::DisplayColorSpaces CreateDisplayColorSpaces(
@@ -329,7 +323,6 @@ gfx::DisplayColorSpaces CreateDisplayColorSpaces(
     display_color_spaces.SetHDRMaxLuminanceRelative(1.1f);
   }
 
-#if BUILDFLAG(IS_CHROMEOS_ASH)
   if (allow_high_bit_depth &&
       snapshot_color_space == gfx::ColorSpace::CreateHDR10() &&
       base::FeatureList::IsEnabled(
@@ -345,10 +338,8 @@ gfx::DisplayColorSpaces CreateDisplayColorSpaces(
         hdr_static_metadata->max /
         display_color_spaces.GetSDRMaxLuminanceNits());
   }
-#endif
   return display_color_spaces;
 }
-#endif  // BUILDFLAG(IS_CHROMEOS)
 
 int ConnectorIndex8(int device_index, int display_index) {
   DCHECK_LT(device_index, 16);
