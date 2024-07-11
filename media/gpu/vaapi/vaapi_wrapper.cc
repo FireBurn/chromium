@@ -1524,7 +1524,7 @@ void VADisplayStateSingleton::PreSandboxInitialization() {
       continue;
     }
     va_display_state.drm_fd_ = base::ScopedFD(drm_file.TakePlatformFile());
-    return;
+    continue;
   }
 }
 
