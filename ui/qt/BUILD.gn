@@ -61,6 +61,7 @@ template("qt_shim") {
     packages = [
       "Qt" + invoker.qt_version + "Core",
       "Qt" + invoker.qt_version + "Widgets",
+      "Qt" + invoker.qt_version + "Gui",
     ]
   }
 
@@ -101,10 +102,12 @@ template("qt_shim") {
     }
   }
 }
-qt_shim("qt5_shim") {
-  qt_version = "5"
-  if (!use_sysroot) {
-    moc_qt_path = "$moc_qt5_path"
+if (use_qt5) {
+  qt_shim("qt5_shim") {
+    qt_version = "5"
+    if (!use_sysroot) {
+      moc_qt_path = "$moc_qt5_path"
+    }
   }
 }
 if (use_qt6) {
@@ -121,8 +124,11 @@ component("qt") {
 
   defines = [ "IS_QT_IMPL" ]
 
+  data_deps = []
   # qt_shim is in data_deps since we want to load it manually.
-  data_deps = [ ":qt5_shim" ]
+  if (use_qt5) {
+    data_deps += [ ":qt5_shim" ]
+  }
   if (use_qt6) {
     data_deps += [ ":qt6_shim" ]
   }
